@@ -1,0 +1,43 @@
+Step 1: Installation
+a) pwd
+b) yum install git -y
+c) git clone https://github.com/ztsoft/Build-Update-Openssh-Centos.git
+d) cd Build-Update-Openssh-Centos
+e) chmod +x build-RPMs-OpenSSH-CentOS.sh
+f) ./ build-RPMs-OpenSSH-CentOS.sh
+This script will install Openssh7.9p1 including all the dependencies.
+Now, the following CIS Benchmark policy that is asking to ensure “only approved mac algorithms are to
+be used” is blocking the sshd daemon. We have put the script “MACs hmac-sha2-512-
+etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128etm@openssh.com,hmac-sha2-
+512,hmac-sha2-256,umac-128@openssh.com” this lines into the sshd config file located in
+“/etc/ssh/sshd_config” in my case I put it on line 125. Now if we comment this line and restart the
+service, the sshd daemon works properly. I have attached the CIS Policy for better understanding.
+
+5.2.12 Ensure only approved MAC algorithms are used (Scored)
+Profile Applicability:
+? Level 1 - Server
+? Level 1 - Workstation
+Description:
+This variable limits the types of MAC algorithms that SSH can use during communication.
+Rationale:
+MD5 and 96-bit MAC algorithms are considered weak and have been shown to increase exploitability in
+SSH downgrade attacks. Weak algorithms continue to have a great deal of attention as a weak spot that
+can be exploited with expanded computing power. An attacker that breaks the algorithm could take
+advantage of a MiTM position to decrypt the SSH tunnel and capture credentials and information
+Audit:
+Run the following command and verify that output does not contain any unlisted MAC algorithms:
+# grep &quot;MACs&quot; /etc/ssh/sshd_config MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-
+etm@openssh.com,umac-128etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-
+128@openssh.com,curve25519sha256@libssh.org,diffie-hellman-group-exchange-sha256
+
+Remediation:
+Edit the /etc/ssh/sshd_config file to set the parameter in accordance with site policy. The following
+includes all supported and accepted MACs:
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-
+128etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+References:
+1. More information on SSH downgrade attacks can be found here:
+http://www.mitls.org/pages/attacks/SLOTH
+Notes:
+Some organizations may have stricter requirements for approved ciphers. Ensure that MACs used are in
+compliance with site policy.

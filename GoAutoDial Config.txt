@@ -1,0 +1,44 @@
+Change the IP address if it takes loopback default.
+
+/usr/share/astguiclient/ADMIN_update_server_ip.pl --old-server_ip=127.0.0.1Mask:2
+
+
+Vicidial Config:
+It goes to:
+
+ /etc/asterisk/sip-vicidial.conf
+
+
+###################################################################################
+Registration String: register => 777245:7Uw5Mae._JyncxkqeNdD@119.40.81.1:5060
+
+
+
+[bdcomrtl]
+disallow=all
+allow=all
+type=friend
+username=777245
+secret=7Uw5Mae._JyncxkqeNdD
+host=119.40.81.1
+dtmfmode=rfc2833
+context=trunkinbound
+qualify=yes
+nat=yes
+fromuser=777245
+fromdomain=119.40.81.1
+insecure=very
+insecure=invite,port
+
+Protocol: SIP
+Global String: BDComRTL=SIP/bdcomrtl
+
+Dialplan Entry:
+
+exten => _X.,1,AGI(agi://127.0.0.1:4577/call_log)
+exten => _X.,2,Dial(${bdcomrtl}/${EXTEN},,tTor)
+exten => _X.,3,Hangup
+
+
+###################################################################################
+

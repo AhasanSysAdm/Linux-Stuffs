@@ -1,0 +1,80 @@
+yum -y install php php-cli php-common php-devel php-pear php-gd php-mbstring php-mysql php-xml php-bcmath
+
+yum install yum-utils -y
+
+yum-config-manager --enable rhel-7-server-optional-rpms
+
+rpm -Uvh https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-2.el7.noarch.rpm
+
+yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent
+
+vim /etc/httpd/conf.d/zabbix.conf
+
+php_value date.timezone America/New_York
+
+yum install -y mariadb-server mariadb
+
+systemctl start mariadb
+
+#######################################################################################
+#DBName: zabbixdb
+#DBUser: zabbixuser
+#DBPassword: password
+
+create database zabbixdb character set utf8 collate utf8_bin;
+
+grant all privileges on zabbixdb.* to zabbixuser@localhost identified by 'password';
+
+quit;
+
+#Once you are done creating the database for Zabbix installation, then import initial schema and data to the newly created database.
+
+cd /usr/share/doc/zabbix-server-mysql*/
+
+zcat create.sql.gz | mysql -u zabbixuser -p zabbixdb
+
+#######################################################################################
+
+Update Database Configuration
+Edit the zabbix_server.conf file to set the database details.
+
+vi /etc/zabbix/zabbix_server.conf
+
+DBHost=localhost
+DBName=zabbixdb
+DBUser=zabbixuser
+DBPassword=password
+
+systemctl restart zabbix-server zabbix-agent httpd
+
+systemctl enable zabbix-server zabbix-agent httpd mariadb
+
+#If you have SELinux enabled on your server, you need to run the following command to enable successful connection of Zabbix web frontend to the server.
+
+yum install -y policycoreutils-python
+
+setsebool -P httpd_can_connect_zabbix on
+
+#Also, add a few custom rules.
+
+curl https://support.zabbix.com/secure/attachment/53320/zabbix_server_add.te > zabbix_server_add.te
+
+checkmodule -M -m -o zabbix_server_add.mod zabbix_server_add.te
+
+semodule_package -m zabbix_server_add.mod -o zabbix_server_add.pp
+
+semodule -i zabbix_server_add.pp
+
+Firewall
+
+firewall-cmd --permanent --add-port=10050/tcp
+
+firewall-cmd --permanent --add-port=10051/tcp
+
+firewall-cmd --permanent --add-port=80/tcp
+
+firewall-cmd --reload
+
+
+
+
