@@ -1,0 +1,1388 @@
+#!/bin/bash
+#1.1.1.1 Ensure mounting of cramfs filesystems is disabled (Automated) profile .
+COUNTER=0;
+modprobe -n -v cramfs | grep -E '(cramfs|install)' 
+touch /etc/modprobe.d/cramfs.conf 
+echo "install cramfs /bin/true" >> /etc/modprobe.d/cramfs.conf
+rmmod cramfs
+let COUNTER=COUNTER+1
+echo $COUNTER  > /home/rtl/TestOutput.txt
+
+ 
+#1.1.1.2 Ensure mounting of freevxfs filesystems is disabled (Automated) 
+touch /etc/modprobe.d/freevxfs.conf 
+echo "install freevxfs /bin/true" > /etc/modprobe.d/freevxfs.conf
+rmmod freevxfs
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#1.1.1.3 Ensure mounting of jffs2 filesystems is disabled (Automated) 
+touch  /etc/modprobe.d/jffs2.conf  
+echo "install jffs2 /bin/true" >  /etc/modprobe.d/jffs2.conf
+rmmod jffs2
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.1.4 Ensure mounting of hfs filesystems is disabled (Automated) 
+touch  /etc/modprobe.d/hfs.conf 
+echo "install hfs /bin/true" >  /etc/modprobe.d/hfs.conf
+rmmod hfs
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.1.5 Ensure mounting of hfsplus filesystems is disabled (Automated)
+touch  /etc/modprobe.d/hfsplus.conf 
+echo "install hfsplus /bin/true" >  /etc/modprobe.d/hfsplus.conf
+rmmod hfsplus
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.1.6 Ensure mounting of udf filesystems is disabled (Automated) 
+touch  /etc/modprobe.d/udf.conf 
+echo "install udf /bin/true" >  /etc/modprobe.d/udf.conf
+rmmod udf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.1.7 Ensure mounting of FAT filesystems is limited (Manual)
+#VFAT Skipped
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.2 Ensure /tmp is configured (Automated) 
+echo "tmpfs /tmp tmpfs     defaults,rw,nosuid,nodev,noexec,relatime  0 0" >>  /etc/fstab
+mount -a
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.3 Ensure nodev option set on /tmp partition (Automated) 
+mount -o remount,nosuid /tmp
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.4 Ensure nosuid option set on /tmp partition (Automated) 
+mount -o remount,nodev /tmp
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.5 Ensure noexec option set on /tmp partition (Automated) 
+mount -o remount,noexec /tmp 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#1.1.6 Ensure /dev/shm is configured (Automated) 
+echo "tmpfs   /dev/shm    tmpfs   defaults,noexec,nodev,nosuid,size=2G  0   0 " >>  /etc/fstab
+mount -o remount,noexec,nodev,nosuid /dev/shm 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#1.1.7 Ensure nodev option set on /dev/shm partition (Automated) 
+mount -o remount,nodev /dev/shm
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.8 Ensure nosuid option set on /dev/shm partition (Automated) 
+mount -o remount,nosuid /dev/shm
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.8 Ensure nosuid option set on /dev/shm partition (Automated) 
+mount -o remount,nosuid /dev/shm
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.9 Ensure noexec option set on /dev/shm partition (Automated) 
+mount -o remount,noexec /dev/shm 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.10 Ensure separate partition exists for /var (Automated) 
+#You should create the partition during OS Setup.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.11 Ensure separate partition exists for /var/tmp (Automated) 
+#You should create the partition during OS Setup.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#1.1.12 Ensure nodev option set on /var/tmp partition (Automated) 
+mount -o remount,nodev /var/tmp
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.13 Ensure nosuid option set on /var/tmp partition (Automated) 
+mount -o remount,nosuid /var/tmp 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.14 Ensure noexec option set on /var/tmp partition (Automated) 
+mount -o remount,noexec /var/tmp 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.15 Ensure separate partition exists for /var/log (Automated) 
+#You should create the partition during OS Setup.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.16 Ensure separate partition exists for /var/log/audit (Automated)
+#You should create the partition during OS Setup.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.17 Ensure separate partition exists for /home (Automated) 
+#You should create the partition during OS Setup.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.18 Ensure nodev option set on /home partition (Automated) 
+mount -o remount,nodev /home 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.19 Ensure nodev option set on removable media partitions (Manual)
+#1.1.20 Ensure nosuid option set on removable media partitions  
+#1.1.21 Ensure noexec option set on removable media partitions (Manual) 
+#N/A, Usually not mounted as OS DVD is removed after setup in cases of virtual machine.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.1.22 Ensure sticky bit is set on all world-writable directories (Automated)
+df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null | xargs -I '{}' chmod a+t '{}'
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.1.23 Disable Automounting (Automated) 
+apt purge autofs -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.1.24 Disable USB Storage (Automated) 
+touch  /etc/modprobe.d/usb_storage.conf 
+echo "install usb-storage /bin/true" >  /etc/modprobe.d/usb_storage.conf
+rmmod usb-storage
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.2.1 Ensure package manager repositories are configured (Manual) 
+#Deafult Config meets the requirment.
+if [[ $(apt-cache policy) ]]; then
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+else
+ echo "Break on 1.2.1 Ensure package manager repositories are configured (Manual) "  >> /home/rtl/TestOutput.txt
+fi
+
+#1.2.2 Ensure GPG keys are configured (Manual)  
+if [[ $(apt-key list) ]]; then
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+else
+ echo "Break on 1.2.2 Ensure GPG keys are configured (Manual) "  >> /home/rtl/TestOutput.txt
+fi
+
+
+#1.3.1 Ensure sudo is installed (Automated) 
+if [[ $(dpkg -s sudo ) ]]; then
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+else
+apt install sudo -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+fi
+
+
+#1.3.2 Ensure sudo commands use pty (Automated) 
+echo "Defaults use_pty" >> /etc/sudoers 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.3.3 Ensure sudo log file exists (Automated) 
+echo "Defaults  logfile="/var/log/sudo.log" " >> /etc/sudoers 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.4.1 Ensure AIDE is installed (Automated) 
+apt install aide aide-common -y
+aideinit
+mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.4.2 Ensure filesystem integrity is regularly checked (Automated) 
+touch  /var/spool/cron/crontabs/root 
+echo "0 5 * * * /usr/bin/aide.wrapper --config /etc/aide/aide.conf --check" >  /var/spool/cron/crontabs/root
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.5.1 Ensure bootloader password is set (Automated) 
+#grub-mkpasswd-pbkdf2 
+echo "Please do it manually Command: grub-mkpasswd-pbkdf2 &&  update-grub " >> /home/rtl/TestOutput.txt
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.5.2 Ensure permissions on bootloader config are configured (Automated)
+chown root:root /boot/grub/grub.cfg
+chmod og-rwx /boot/grub/grub.cfg
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.5.3 Ensure authentication required for single user mode (Automated) 
+#Deafult 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.6.1 Ensure XD/NX support is enabled (Automated) 
+if [[ $(journalctl | grep 'protection: active') ]]; then
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+fi
+
+
+
+#1.6.2 Ensure address space layout randomization (ASLR) is enabled (Automated)
+echo "kernel.randomize_va_space = 2" >> /etc/sysctl.conf 
+sysctl -w kernel.randomize_va_space=2 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.6.3 Ensure prelink is disabled (Automated) 
+apt purge prelink -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.6.4 Ensure core dumps are restricted (Automated) 
+systemctl is-enabled coredump.service
+echo "* hard core 0" >> /etc/security/limits.conf 
+echo "fs.suid_dumpable = 0" >> /etc/sysctl.conf 
+sysctl -w fs.suid_dumpable=0 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#1.7.1.1 Ensure AppArmor is installed (Automated) 
+#Deafult installed
+apt install apparmor -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.7.1.2 Ensure AppArmor is enabled in the bootloader configuration (Automated) 
+sed -i ""s/^GRUB_CMDLINE_LINUX=""/#GRUB_CMDLINE_LINUX=""/"" /etc/default/grub
+echo 'GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"' >> /etc/default/grub
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.7.1.3 Ensure all AppArmor Profiles are in enforce or complain mode (Automated)
+#1.7.1.4 Ensure all AppArmor Profiles are enforcing (Automated) 
+apt install apparmor-utils -y
+aa-enforce /etc/apparmor.d/* 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.8.1.1 Ensure message of the day is configured properly (Automated) 
+echo " Hi RTL Techy! Good Day!!! " >  /etc/motd 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.8.1.2 Ensure local login warning banner is configured properly (Automated)
+echo "Authorized RTL uses only. All activity may be monitored and reported." > /etc/issue
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#1.8.1.3 Ensure remote login warning banner is configured properly (Automated) 
+echo "Authorized RTL uses only. All activity may be monitored and reported." > /etc/issue.net
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.8.1.4 Ensure permissions on /etc/motd are configured (Automated) 
+chown root:root /etc/motd && chmod u-x,go-wx /etc/motd
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.8.1.5 Ensure permissions on /etc/issue are configured (Automated) 
+chown root:root /etc/issue.net && chmod u-x,go-wx /etc/issue.net
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.9 Ensure updates, patches, and additional security software are installed (Manual) 
+apt update -y && apt upgrade -y && apt autoremove -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#1.10 Ensure GDM is removed or login is configured (Automated) 
+#apt install gdm3 -y
+#mkdir /etc/gdm3/
+#touch /etc/gdm3/greeter.dconf-defaults
+#echo "[org/gnome/login-screen]" > /etc/gdm3/greeter.dconf-defaults
+#echo "banner-message-enable=true" >> /etc/gdm3/greeter.dconf-defaults
+#echo "banner-message-text='Property of Recursion Technologies Limited. Remember, Great Power comes with Great Responsibilities'" >> /etc/gdm3/greeter.dconf-defaults
+#echo "disable-user-list=true >> /etc/gdm3/greeter.dconf-defaults" >> /etc/gdm3/greeter.dconf-defaults
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.1.1 Ensure xinetd is not installed (Automated) 
+apt purge xinetd -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.1.2 Ensure openbsd-inetd is not installed (Automated) 
+apt purge openbsd-inetd -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#2.2.1.1 Ensure time synchronization is in use (Automated) .
+#2.2.1.3 Ensure chrony is configured (Automated) 
+apt install chrony -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.1.2 Ensure systemd-timesyncd is configured (Manual) 
+timedatectl set-timezone Asia/Dhaka
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.1.4 Ensure ntp is configured (Automated) 
+#Not Applicable as chrony is installed and configured.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.2 Ensure X Window System is not installed (Automated) 
+apt purge xserver-xorg* 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.3 Ensure Avahi Server is not installed (Automated) 
+systemctl stop avahi-daaemon.service
+systemctl stop avahi-daemon.socket
+apt purge avahi-daemon -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.2.4 Ensure CUPS is not installed (Automated) 
+apt purge cups -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.5 Ensure DHCP Server is not installed (Automated) 
+apt purge isc-dhcp-server -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.6 Ensure LDAP server is not installed (Automated) 
+apt purge slapd  -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.2.7 Ensure NFS is not installed (Automated)
+apt purge rpcbind -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.8 Ensure DNS Server is not installed (Automated) 
+apt purge bind9  -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.2.9 Ensure FTP Server is not installed (Automated) 
+apt purge vsftpd -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.10 Ensure HTTP server is not installed (Automated) 
+apt purge apache2 -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.11 Ensure IMAP and POP3 server are not installed (Automated) 
+apt purge dovecot-imapd dovecot-pop3d -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.12 Ensure Samba is not installed (Automated) 
+apt purge samba -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.2.13 Ensure HTTP Proxy Server is not installed (Automated) 
+apt purge squid -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.14 Ensure SNMP Server is not installed (Automated) 
+apt purge snmpd -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.2.15 Ensure mail transfer agent is configured for local-only mode (Automated) //Not Applicable as no mail agent is installed.
+mkdir /etc/exim4
+touch /etc/exim4/update-exim4.conf
+echo "dc_eximconfig_configtype='local' " >> /etc/exim4/update-exim4.conf
+echo "dc_local_interfaces='127.0.0.1 ; ::1' " >> /etc/exim4/update-exim4.conf
+echo "dc_readhost='' " >> /etc/exim4/update-exim4.conf
+echo "dc_relay_domains='' " >> /etc/exim4/update-exim4.conf
+echo "dc_minimaldns='false' " >> /etc/exim4/update-exim4.conf
+echo "dc_relay_nets='' " >> /etc/exim4/update-exim4.conf
+echo "dc_smarthost='' " >> /etc/exim4/update-exim4.conf
+echo "dc_use_split_config='false' " >> /etc/exim4/update-exim4.conf
+echo "dc_hide_mailname='' " >> /etc/exim4/update-exim4.conf
+echo "dc_mailname_in_oh='true' " >> /etc/exim4/update-exim4.conf
+echo "dc_localdelivery='mail_spool'" >> /etc/exim4/update-exim4.conf
+
+#systemctl restart exim4
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#2.2.16 Ensure rsync service is not installed (Automated) 
+apt purge rsync -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#2.2.17 Ensure NIS Server is not installed (Automated) 
+apt purge nis -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.3.1 Ensure NIS Client is not installed (Automated) 
+apt purge nis -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.3.2 Ensure rsh client is not installed (Automated) 
+apt purge rsh-client -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.3.3 Ensure talk client is not installed (Automated)
+apt purge talk -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.3.4 Ensure telnet client is not installed (Automated) 
+apt purge telnet -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.3.5 Ensure LDAP client is not installed (Automated) 
+apt purge ldap-utils -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#2.3.6 Ensure RPC is not installed (Automated) 
+apt purge rpcbind -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#2.4 Ensure nonessential services are removed or masked (Manual)
+##Already Done.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.1.1 Disable IPv6 (Manual) 
+echo 'GRUB_CMDLINE_LINUX="ipv6.disable=1"' >> /etc/default/grub 
+update-grub
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.1.2 Ensure wireless interfaces are disabled (Automated) 
+/etc/modprobe.d/disable_wireless.conf
+echo "Run script manually" >> /home/rtl/TestOutput.txt
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#3.2.1 Ensure packet redirect sending is disabled (Automated) 
+echo "net.ipv4.conf.all.send_redirects = 0" >> /etc/sysctl.conf 
+echo "net.ipv4.conf.default.send_redirects = 0" >> /etc/sysctl.conf 
+
+sysctl -w net.ipv4.conf.all.send_redirects=0 
+sysctl -w net.ipv4.conf.default.send_redirects=0 
+sysctl -w net.ipv4.route.flush=1 
+
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.2.2 Ensure IP forwarding is disabled (Automated) //ipv4 only.
+grep -Els "^\s*net\.ipv4\.ip_forward\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv4\.ip_forward\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/" $filename; done; sysctl -w net.ipv4.ip_forward=0; sysctl -w
+net.ipv4.route.flush=1
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.1 Ensure source routed packets are not accepted (Automated) //ipv4 only.
+
+echo "net.ipv4.conf.all.accept_source_route = 0" >> /etc/sysctl.conf 
+echo "net.ipv4.conf.default.accept_source_route = 0" >> /etc/sysctl.conf 
+
+sysctl -w net.ipv4.conf.all.accept_source_route=0
+sysctl -w net.ipv4.conf.default.accept_source_route=0 
+sysctl -w net.ipv4.route.flush=1 
+
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.2 Ensure ICMP redirects are not accepted (Automated) //ipv4 only.
+echo "net.ipv4.conf.all.accept_redirects = 0" >> /etc/sysctl.conf 
+echo "net.ipv4.conf.default.accept_redirects = 0" >> /etc/sysctl.conf 
+sysctl -w net.ipv4.conf.all.accept_redirects=0 
+sysctl -w net.ipv4.conf.default.accept_redirects=0
+sysctl -w net.ipv4.route.flush=1 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.3 Ensure secure ICMP redirects are not accepted (Automated) 
+echo "net.ipv4.conf.all.secure_redirects = 0" >> /etc/sysctl.conf 
+echo "net.ipv4.conf.default.secure_redirects = 0" >> /etc/sysctl.conf 
+
+sysctl -w net.ipv4.conf.all.secure_redirects=0 
+sysctl -w net.ipv4.conf.default.secure_redirects=0 
+sysctl -w net.ipv4.route.flush=1
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.3.4 Ensure suspicious packets are logged (Automated) 
+echo "net.ipv4.conf.all.log_martians = 1" >> /etc/sysctl.conf 
+echo "net.ipv4.conf.default.log_martians = 1" >> /etc/sysctl.conf
+
+sysctl -w net.ipv4.conf.all.log_martians=1 
+sysctl -w net.ipv4.conf.default.log_martians=1
+sysctl -w net.ipv4.route.flush=1
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.5 Ensure broadcast ICMP requests are ignored (Automated)  
+echo "net.ipv4.icmp_echo_ignore_broadcasts = 1" >> /etc/sysctl.conf
+sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1 
+sysctl -w net.ipv4.route.flush=1
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.6 Ensure bogus ICMP responses are ignored (Automated) 
+echo "net.ipv4.icmp_ignore_bogus_error_responses = 1" >> /etc/sysctl.conf
+sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1 
+sysctl -w net.ipv4.route.flush=1 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#3.3.7 Ensure Reverse Path Filtering is enabled (Automated) 
+
+
+
+echo "net.ipv4.conf.all.rp_filter = 1" >> /etc/sysctl.conf 
+echo "net.ipv4.conf.default.rp_filter = 1" >> /etc/sysctl.conf
+
+sysctl -w net.ipv4.conf.all.rp_filter=1 
+sysctl -w net.ipv4.conf.default.rp_filter=1 
+sysctl -w net.ipv4.route.flush=1
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.8 Ensure TCP SYN Cookies is enabled (Automated) 
+echo "net.ipv4.tcp_syncookies = 1" >> /etc/sysctl.conf 
+sysctl -w net.ipv4.tcp_syncookies=1 
+sysctl -w net.ipv4.route.flush=
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.3.9 Ensure IPv6 router advertisements are not accepted (Automated)
+echo "net.ipv6.conf.all.accept_ra = 0" >> /etc/sysctl.conf 
+echo "net.ipv6.conf.default.accept_ra = 0" >> /etc/sysctl.conf 
+sysctl -w net.ipv6.conf.all.accept_ra=0 
+sysctl -w net.ipv6.conf.default.accept_ra=0 
+sysctl -w net.ipv6.route.flush=1
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.4.1 Ensure DCCP is disabled (Automated) 
+touch /etc/modprobe.d/dccp.conf
+echo "install dccp /bin/true" >> /etc/modprobe.d/dccp.conf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.4.2 Ensure SCTP is disabled (Automated) 
+touch /etc/modprobe.d/sctp.conf 
+echo "install sctp /bin/true " >> /etc/modprobe.d/sctp.conf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.4.3 Ensure RDS is disabled (Automated) 
+touch /etc/modprobe.d/rds.conf
+echo "install rds /bin/true" >> /etc/modprobe.d/rds.conf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.4.4 Ensure TIPC is disabled (Automated) 
+touch /etc/modprobe.d/tipc.conf 
+echo "install tipc /bin/true" >> /etc/modprobe.d/tipc.conf 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.5.1.1 Ensure Uncomplicated Firewall is installed (Automated) 
+apt install ufw -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.5.1.2 Ensure iptables-persistent is not installed (Automated) 
+apt purge iptables-persistent -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.5.1.3 Ensure ufw service is enabled (Automated)
+ufw enable 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.5.1.4 Ensure loopback traffic is configured (Automated) 
+ufw allow in on lo 
+ufw allow out from lo 
+ufw deny in from 127.0.0.0/8 
+ufw deny in from ::1 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.5.1.5 Ensure outbound connections are configured (Manual) 
+ufw allow out on all 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#3.5.1.6 Ensure firewall rules exist for all open ports (Manual) 
+#Default Done
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.5.1.7 Ensure default deny firewall policy (Automated) 
+ufw default deny incoming 
+ufw default deny outgoing 
+ufw default deny routed
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#3.5.2 && 3.5.3 has been skipped as ufw is configured, NFTABLES and IPTABLES need not to configure.
+
+#4.1.1.1 Ensure auditd is installed (Automated) 
+apt install auditd audispd-plugins -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.1.2 Ensure auditd service is enabled (Automated)
+systemctl --now enable auditd 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#4.1.1.3 Ensure auditing for processes that start prior to auditd is enabled (Automated) 
+echo 'GRUB_CMDLINE_LINUX="audit=1"' >> /etc/default/grub
+update-grub 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.1.4 Ensure audit_backlog_limit is sufficient (Automated) 
+echo 'GRUB_CMDLINE_LINUX="audit_backlog_limit=8192"' >> /etc/default/grub
+update-grub 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.2.1 Ensure audit log storage size is configured (Automated)
+echo "max_log_file = 10M" >> /etc/audit/auditd.conf 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#4.1.2.2 Ensure audit logs are not automatically deleted (Automated) 
+echo "max_log_file_action = keep_logs" >> /etc/audit/auditd.conf 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.2.3 Ensure system is disabled when audit logs are full (Automated) 
+echo "space_left_action = email" >> /etc/audit/auditd.conf 
+echo "action_mail_acct = root" >> /etc/audit/auditd.conf 
+echo "admin_space_left_action = halt" >> /etc/audit/auditd.conf 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.1.3 Ensure events that modify date and time information are collected (Automated) 
+echo "-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change" >> /etc/audit/rules.d/audit.rules
+echo "-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k timechange" >> /etc/audit/rules.d/audit.rules
+echo "-a always,exit -F arch=b64 -S clock_settime -k time-change" >> /etc/audit/rules.d/audit.rules
+echo "-a always,exit -F arch=b32 -S clock_settime -k time-change" >> /etc/audit/rules.d/audit.rules
+echo "-w /etc/localtime -p wa -k time-change" >> /etc/audit/rules.d/audit.rules 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.1.4 Ensure events that modify user/group information are collected (Automated) 
+echo "-w /etc/group -p wa -k identity" >> /etc/audit/rules.d/audit.rules
+echo "-w /etc/passwd -p wa -k identity" >> /etc/audit/rules.d/audit.rules
+echo "-w /etc/gshadow -p wa -k identity" >> /etc/audit/rules.d/audit.rules
+echo "-w /etc/shadow -p wa -k identity" >> /etc/audit/rules.d/audit.rules
+echo "-w /etc/security/opasswd -p wa -k identity" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.1.5 Ensure events that modify the system's network environment are collected (Automated)
+echo -e "-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale \n-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale \n-w /etc/issue -p wa -k system-locale \n-w /etc/issue.net -p wa -k system-locale \n-w /etc/hosts -p wa -k system-locale \n-w /etc/network -p wa -k system-locale" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.1.6 Ensure events that modify the system's Mandatory Access Controls are collected (Automated) 
+echo -e "-w /etc/apparmor/ -p wa -k MAC-policy \n-w /etc/apparmor.d/ -p wa -k MAC-policy" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.7 Ensure login and logout events are collected (Automated) 
+echo -e "-w /var/log/faillog -p wa -k logins \n-w /var/log/lastlog -p wa -k logins \n-w /var/log/tallylog -p wa -k logins" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.8 Ensure session initiation information is collected (Automated) 
+echo -e "-w /var/run/utmp -p wa -k session \n-w /var/log/wtmp -p wa -k logins \n-w /var/log/btmp -p wa -k logins" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.9 Ensure discretionary access control permission modification events are collected (Automated) 
+echo -e "-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod \n-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod \n-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod \n-a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod \n-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod \n-a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.10 Ensure unsuccessful unauthorized file access attempts are collected (Automated) 
+echo -e "-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access \n-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access \n-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access \n-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k acces" >> /etc/audit/rules.d/audit.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.11 Ensure use of privileged commands is collected (Automated) 
+find / -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk '{print "-a always,exit -F path=" $1 " -F perm=x -F auid>='"$(awk '/^\s*UID_MIN/{print $2}' /etc/login.defs)"' -F auid!=4294967295 -k privileged" }' >> /etc/audit/rules.d/privileged.rules 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.12 Ensure successful file system mounts are collected (Automated)
+touch /etc/audit/rules.d/mount.rules
+echo -e "-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts \n-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts" >> /etc/audit/rules.d/mount.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.13 Ensure file deletion events by users are collected (Automated)
+
+touch /etc/audit/rules.d/delete.rules
+echo -e "-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete \n-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete" >> /etc/audit/rules.d/delete.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.14 Ensure changes to system administration scope (sudoers) is collected (Automated) 
+touch /etc/audit/rules.d/scope.rules
+echo -e "-w /etc/sudoers -p wa -k scope \n-w /etc/sudoers.d/ -p wa -k scope" >> /etc/audit/rules.d/scope.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.15 Ensure system administrator command executions (sudo) are collected (Automated) 
+touch /etc/audit/rules.d/actions.rules
+echo -e "-a always,exit -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions  \n-a always,exit -F arch=b32 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions" >> /etc/audit/rules.d/actions.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.1.16 Ensure kernel module loading and unloading is collected (Automated)
+touch /etc/audit/rules.d/modules.rules
+echo -e "-w /sbin/insmod -p x -k modules \n-w /sbin/rmmod -p x -k modules \n-w /sbin/modprobe -p x -k modules \n-a always,exit -F arch=b64 -S init_module -S delete_module -k modules" >> /etc/audit/rules.d/modules.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.1.17 Ensure the audit configuration is immutable (Automated) 
+touch /etc/audit/rules.d/99-finalize.rules 
+echo "-e 2" >> /etc/audit/rules.d/99-finalize.rules
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.2.1.1 Ensure rsyslog is installed (Automated) 
+apt install rsyslog -y
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.2.1.2 Ensure rsyslog Service is enabled (Automated)
+systemctl --now enable rsyslog 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#4.2.1.3 Ensure logging is configured (Manual) 
+echo -e "*.emerg                                  :omusrmsg:* \nauth,authpriv.*                          /var/log/auth.log \nmail.*                                  -/var/log/mail \nmail.info                               -/var/log/mail.info \nmail.warning                            -/var/log/mail.warn \nmail.err                                 /var/log/mail.err \nnews.crit                               -/var/log/news/news.crit \nnews.err                                -/var/log/news/news.err \nnews.notice                             -/var/log/news/news.notice \n*.=warning;*.=err                       -/var/log/warn \n*.crit                                   /var/log/warn \n*.*;mail.none;news.none                 -/var/log/messages \nlocal0,local1.*                         -/var/log/localmessages \nlocal2,local3.*                         -/var/log/localmessages \nlocal4,local5.*                         -/var/log/localmessages \nlocal6,local7.*                         -/var/log/localmessages" >> /etc/rsyslog.conf  
+systemctl reload rsyslog 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.2.1.4 Ensure rsyslog default file permissions configured (Automated) 
+echo "FileCreateMode 0640" >> /etc/rsyslog.conf 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.2.1.5 Ensure rsyslog is configured to send logs to a remote log host (Automated)
+#4.2.1.6 Ensure remote rsyslog messages are only accepted on designated log hosts. (Manual)
+
+
+
+
+#4.2.2.1 Ensure journald is configured to send logs to rsyslog (Automated) 
+echo "ForwardToSyslog=yes" >> /etc/systemd/journald.conf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.2.2.2 Ensure journald is configured to compress large log files (Automated)
+echo "Compress=yes" >> /etc/systemd/journald.conf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#4.2.2.3 Ensure journald is configured to write logfiles to persistent disk (Automated)
+echo "Storage=persistent" >> /etc/systemd/journald.conf 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.2.3 Ensure permissions on all logfiles are configured (Automated) 
+find /var/log -type f -exec chmod g-wx,o-rwx "{}" + -o -type d -exec chmod gw,o-rwx "{}" + 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#4.3 Ensure logrotate is configured (Manual)
+#echo "/etc/logrotate.conf" >> /etc/logrotate.conf Default On.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#4.4 Ensure logrotate assigns appropriate permissions (Automated) 
+sed -i "s/^create/create 0640 root utmp/"  /etc/logrotate.conf
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.1.1 Ensure cron daemon is enabled and running (Automated) 
+systemctl --now enable cron 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.1.2 Ensure permissions on /etc/crontab are configured (Automated) 
+chown root:root /etc/crontab 
+chmod og-rwx /etc/cronta
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.1.3 Ensure permissions on /etc/cron.hourly are configured (Automated)
+chown root:root /etc/cron.hourly/ 
+chmod og-rwx /etc/cron.hourly/
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.1.4 Ensure permissions on /etc/cron.daily are configured (Automated) 
+chown root:root /etc/cron.daily/ 
+chmod og-rwx /etc/cron.daily/ 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.1.5 Ensure permissions on /etc/cron.weekly are configured (Automated)
+chown root:root /etc/cron.weekly/ 
+chmod og-rwx /etc/cron.weekly/
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.1.6 Ensure permissions on /etc/cron.monthly are configured (Automated)
+chown root:root /etc/cron.monthly/ 
+chmod og-rwx /etc/cron.monthly/
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.1.7 Ensure permissions on /etc/cron.d are configured (Automated)
+chown root:root /etc/cron.d/ 
+chmod og-rwx /etc/cron.d/ 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.1.8 Ensure cron is restricted to authorized users (Automated) 
+rm /etc/cron.deny 
+touch /etc/cron.allow
+chmod g-wx,o-rwx /etc/cron.allow 
+chown root:root /etc/cron.allow
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.1.9 Ensure at is restricted to authorized users (Automated)
+rm /etc/at.deny 
+touch /etc/at.allow 
+chmod g-wx,o-rwx /etc/at.allow 
+chown root:root /etc/at.allow
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.1 Ensure permissions on /etc/ssh/sshd_config are configured (Automated)
+chown root:root /etc/ssh/sshd_config 
+chmod og-rwx /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.2 Ensure permissions on SSH private host key files are configured (Automated)
+find /etc/ssh -xdev -type f -name 'ssh_host_*_key' | xargs chown root:root 
+find /etc/ssh -xdev -type f -name 'ssh_host_*_key' | xargs chmod 0600
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.2.3 Ensure permissions on SSH public host key files are configured (Automated) 
+find /etc/ssh -xdev -type f -name 'ssh_host_*_key.pub' | xargs chmod go-wx 
+find /etc/ssh -xdev -type f -name 'ssh_host_*_key.pub' | xargs chown root:root
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.4 Ensure SSH LogLevel is appropriate (Automated) 
+echo "LogLevel INFO" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.5 Ensure SSH X11 forwarding is disabled (Automated)
+echo "X11Forwarding no" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.2.6 Ensure SSH MaxAuthTries is set to 4 or less (Automated) 
+echo "MaxAuthTries 4" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.7 Ensure SSH IgnoreRhosts is enabled (Automated) 
+echo "IgnoreRhosts yes" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.8 Ensure SSH HostbasedAuthentication is disabled (Automated) 
+echo "HostbasedAuthentication no" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.2.9 Ensure SSH root login is disabled (Automated) 
+echo "PermitRootLogin no" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.10 Ensure SSH PermitEmptyPasswords is disabled (Automated) 
+echo "PermitEmptyPasswords no" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.11 Ensure SSH PermitUserEnvironment is disabled (Automated) 
+echo "PermitUserEnvironment no" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.2.12 Ensure only strong Ciphers are used (Automated) 
+#echo "Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr" >> /etc/ssh/sshd_config  //Default Config
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.2.13 Ensure only strong MAC algorithms are used (Automated)  //Default Config
+#echo "hmac-md5 \nhmac-md5-96 \nhmac-ripemd160 \nhmac-sha1 \nhmac-sha1-96 \numac-64@openssh.com \numac-128@openssh.com \nhmac-md5-etm@openssh.com \nhmac-md5-96-etm@openssh.com \nhmac-ripemd160-etm@openssh.com \nhmac-sha1-etm@openssh.com \nhmac-sha1-96-etm@openssh.com \numac-64-etm@openssh.com \numac-128-etm@openssh.com" >>  /etc/ssh/sshd_config
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.14 Ensure only strong Key Exchange algorithms are used (Automated) //Default Config
+#echo "KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellmangroup14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18sha512,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffiehellman-group-exchange-sha256" >> /etc/ssh/sshd_config
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.15 Ensure SSH Idle Timeout Interval is configured (Automated)
+echo "ClientAliveInterval 300 \nClientAliveCountMax 3" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.16 Ensure SSH LoginGraceTime is set to one minute or less (Automated)
+echo "LoginGraceTime 60" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.17 Ensure SSH access is limited (Automated) 
+echo "AllowUsers rtladmahasan,rtladmjohn, rtladmazmir \nAllowGroups rtlsysadmin \nDenyUsers test \nDenyGroups testgroup" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.18 Ensure SSH warning banner is configured (Automated) 
+echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.2.19 Ensure SSH PAM is enabled (Automated)
+echo "UsePAM yes" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.20 Ensure SSH AllowTcpForwarding is disabled (Automated) 
+echo "AllowTcpForwarding no" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.21 Ensure SSH MaxStartups is configured (Automated) 
+echo "maxstartups 10:30:10" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.2.22 Ensure SSH MaxSessions is limited (Automated)
+echo "MaxSessions 10" >> /etc/ssh/sshd_config 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.3.1 Ensure password creation requirements are configured (Automated)
+apt install libpam-pwquality -y
+echo "dcredit = -1 \nucredit = -1 \nocredit = -1 \nlcredit = -1" >> /etc/security/pwquality.conf 
+echo "password requisite pam_pwquality.so retry=3" >>  /etc/pam.d/common-password 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.3.2 Ensure lockout for failed password attempts is configured (Automated) 
+echo "auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900" >> /etc/pam.d/common-auth
+echo "account     requisite    pam_deny.so account     required     pam_tally2.so" >> /etc/pam.d/common-account
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.3.3 Ensure password reuse is limited (Automated)
+echo "password required pam_pwhistory.so remember=5" >> /etc/pam.d/common-password
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.3.4 Ensure password hashing algorithm is SHA-512 (Automated) 
+echo "password [success=1 default=ignore] pam_unix.so sha512" >> /etc/pam.d/common-password
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#5.4.1.1 Ensure password expiration is 365 days or less (Automated) 
+sed -i "s/99999/40/" /etc/login.defs
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.4.1.2 Ensure minimum days between password changes is configured (Automated) 
+sed -i ""s/^PASS_MIN_DAYS/#PASS_MIN_DAYS/"" /etc/login.defs
+echo "PASS_MIN_DAYS 1" >> /etc/login.defs
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.4.1.3 Ensure password expiration warning days is 7 or more (Automated)
+sed -i ""s/^PASS_WARN_AGE/#PASS_WARN_AGE/"" /etc/login.defs
+echo "PASS_WARN_AGE 7" >> /etc/login.defs
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+ 
+
+#5.4.1.4 Ensure inactive password lock is 30 days or less (Automated) 
+#Doit during user creation.
+
+
+#5.4.1.5 Ensure all users last password change date is in the past (Automated) 
+for usr in $(cut -d: -f1 /etc/shadow); do [[ $(chage --list $usr | grep '^Last password change' | cut -d: -f2) > $(date) ]] && echo "$usr :$(chage -list $usr | grep '^Last password change' | cut -d: -f2)"; done
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.4.2 Ensure system accounts are secured (Automated) //This will force non-root accounts to nologin.
+awk -F: '($1!="root" && $1!~/^\+/ && $3<'"$(awk '/^\s*UID_MIN/{print $2}' /etc/login.defs)"') {print $1}' /etc/passwd | xargs -I '{}' passwd -S '{}' | awk '($2!="L" && $2!="LK") {print $1}' | while read -r user; do usermod -L "$user"; done
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.4.3 Ensure default group for the root account is GID 0 (Automated) 
+usermod -g 0 root
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#5.4.4 Ensure default user umask is 027 or more restrictive (Automated) 
+echo "UMASK 027" >> /etc/login.defs
+Edit  and add or edit the following: 
+echo "session optional                        pam_umask.so" >> /etc/pam.d/common-session
+grep -RPi '(^|^[^#]*)\s*umask\s+([0-7][0-7][01][0-7]\b|[0-7][0-7][0-7][06]\b|[0-7][01][0-7]\b|[0-7][0-7][06]\b|(u=[rwx]{0,3},)?(g=[rwx]{0,3},)?o=[rwx]+\b|(u=[rwx]{1,3},)?g=[^rx]{1,3}( ,o=[rwx]{0,3})?\b)' /etc/login.defs /etc/profile* /etc/bash.bashrc* 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.4.5 Ensure default user shell timeout is 900 seconds or less (Automated) //Default Config
+grep -P '^\s*([^$#;]+\s+)*TMOUT=(9[0-9][1-9]|0+|[19]\d{3,})\b\s*(\S+\s*)*(\s+#.*)?$' /etc/profile /etc/profile.d/*.sh /etc/bash.bashrc 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.5 Ensure root login is restricted to system console (Manual) //Default Config
+cat /etc/securetty 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#5.6 Ensure access to the su command is restricted (Automated) 
+groupadd sugroup 
+echo "auth required pam_wheel.so use_uid group=sugroup" >> /etc/pam.d/su file
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#6.1.1 Audit system file permissions (Manual)  //Default Config
+dpkg -S /bin/bash 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.1.2 Ensure permissions on /etc/passwd are configured (Automated) 
+chown root:root /etc/passwd 
+chmod 644 /etc/passwd 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.1.3 Ensure permissions on /etc/gshadow- are configured (Automated) 
+chown root:root /etc/gshadow-
+chown root:shadow /etc/gshadow- 
+chmod o-rwx,g-wx /etc/gshadow- 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.1.4 Ensure permissions on /etc/shadow are configured (Automated) 
+chown root:root /etc/shadow
+chown root:shadow /etc/shadow 
+chmod o-rwx,g-wx /etc/shadow
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+#6.1.5 Ensure permissions on /etc/group are configured (Automated
+chown root:root /etc/group 
+chmod u-x,go-wx /etc/group
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#6.1.6 Ensure permissions on /etc/passwd- are configured (Automated) 
+chown root:root /etc/passwd- 
+chmod u-x,go-wx /etc/passwd-
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.1.7 Ensure permissions on /etc/shadow- are configured (Automated) 
+chown root:shadow /etc/shadow- 
+chmod u-x,g-wx,o-rwx /etc/shadow-
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.1.8 Ensure permissions on /etc/group- are configured (Automated) 
+chown root:root /etc/group- 
+chmod u-x,go-wx /etc/group-
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+
+#6.1.9 Ensure permissions on /etc/gshadow are configured (Automated)
+chown root:root /etc/gshadow
+chown root:shadow /etc/gshadow 
+chmod u-x,g-wx,o-rwx /etc/gshadow
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.1.10 Ensure no world writable files exist (Automated) //N/A
+df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -000
+
+
+
+#6.1.11 Ensure no unowned files or directories exist (Automated) //N/A
+df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nouser
+
+
+
+#6.1.12 Ensure no ungrouped files or directories exist (Automated) //N/A
+df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -nogroup
+
+
+
+#6.1.13 Audit SUID executables (Manual)//N/A
+df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -4000 
+
+
+#6.1.14 Audit SGID executables (Manual)
+df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -2000
+
+
+#6.2.1 Ensure password fields are not empty (Automated) //Default Config.
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.2.2 Ensure root is the only UID 0 account (Automated) //Default Config.
+awk -F: '($3 == 0) { print $1 }' /etc/passwd 
+let COUNTER=COUNTER+1
+echo $COUNTER  >> /home/rtl/TestOutput.txt
+
+
+#6.2.3 Ensure root PATH Integrity (Automated) //Default Config
+#6.2.4 Ensure all users' home directories exist (Automated) //Default Config
+#6.2.5 Ensure users' home directories permissions are 750 or more restrictive (Automated)//Default Config
+#6.2.6 Ensure users own their home directories (Automated) //Default Config
+#6.2.7 Ensure users' dot files are not group or world writable (Automated)  //Default Config
+#6.2.8 Ensure no users have .forward files (Automated) //Default Config
+#6.2.9 Ensure no users have .netrc files (Automated) //Default Config
+#6.2.10 Ensure users' .netrc Files are not group or world accessible (Automated) //Default Config
+#6.2.11 Ensure no users have .rhosts files (Automated) //Default Config
+#6.2.12 Ensure all groups in /etc/passwd exist in /etc/group (Automated) //Default Config
+#6.2.13 Ensure no duplicate UIDs exist (Automated) 
+#6.2.14 Ensure no duplicate GIDs exist (Automated) 
+#6.2.15 Ensure no duplicate user names exist (Automated) 
+#6.2.16 Ensure no duplicate group names exist (Automated) 
+#6.2.17 Ensure shadow group is empty (Automated) 
